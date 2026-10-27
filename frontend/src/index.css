@@ -1,0 +1,6 @@
+/* 전역 스타일은 최소한만. 나머지는 MUI theme(src/theme.js)에서 관리 */
+html,
+body,
+#root {
+  min-height: 100%;
+}
