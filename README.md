@@ -46,4 +46,4 @@ DIDIMDOL/
 ## 실행
 
 화면: [frontend/README.md](frontend/README.md) 참고. 개발 서버는 `http://localhost:5173`.
-서버: Uvicorn으로 `8080` 포트에서 실행한다.
+서버: [backend/README.md](backend/README.md) 참고. FastAPI 서버는 Uvicorn 사용 `http://localhost:8080`.
