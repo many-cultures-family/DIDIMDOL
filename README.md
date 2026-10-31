@@ -49,17 +49,31 @@ DIDIMDOL/
 
 ### 처음 한 번만: 설치
 
+코드 블록은 그대로 복사해 붙여넣을 수 있도록 주석을 넣지 않았다.
+
+1. Python 3.14, Node 24 설치. `node@24`는 Homebrew가 PATH에 자동으로 연결하지 않으므로 직접 연결한다. 다른 버전의 `node`가 이미 연결돼 있으면 `brew unlink node`를 먼저 실행한다.
+
 ```bash
 brew install python@3.14 node@24
+brew link --overwrite node@24
+node -v
+```
 
-# 서버: venv는 backend/ 안에 만든다
+`node -v`가 `v24.x`로 나오면 된다.
+
+2. 서버 라이브러리 설치. venv는 `backend/` 안에 만든다.
+
+```bash
 python3.14 -m venv backend/.venv
 backend/.venv/bin/pip install -r requirements.txt
+```
 
-# 화면
+3. 화면 라이브러리 설치와 환경 변수 파일 복사. 실서버에 붙이려면 `frontend/.env.local`에서 `VITE_USE_MOCK=false`로 바꾼다.
+
+```bash
 cd frontend
 npm install
-cp .env.example .env.local   # 실서버에 붙이려면 VITE_USE_MOCK=false
+cp .env.example .env.local
 cd ..
 ```
 
@@ -86,14 +100,20 @@ npm run dev
 
 프로젝트 루트에서 실행한다. `pytest.ini`가 `backend/`를 import 경로에 넣어 준다.
 
+서버 테스트(`tests/`)와 서버 린트·포맷:
+
 ```bash
 source backend/.venv/bin/activate
+pytest
+ruff check backend tests
+ruff format backend tests
+```
 
-pytest                        # 서버 테스트 (tests/)
-ruff check backend tests      # 서버 린트
-ruff format backend tests     # 서버 포맷
+화면 린트:
 
-cd frontend && npm run lint   # 화면 린트
+```bash
+cd frontend
+npm run lint
 ```
 
 자세한 내용은 [frontend/README.md](frontend/README.md), [backend/README.md](backend/README.md) 참고.
